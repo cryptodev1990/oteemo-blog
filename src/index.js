@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import Button from './button';
 import {BrowserRouter} from 'react-router-dom'
 
-
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>

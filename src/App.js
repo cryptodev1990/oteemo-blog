@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Container, Row, Col} from 'react-bootstrap'
 import './button';
@@ -56,8 +55,7 @@ function App() {
             </Container>
         </div>
     );
+
 }
-
-
 
 export default App;
