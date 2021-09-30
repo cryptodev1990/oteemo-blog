@@ -24,3 +24,5 @@ yarn-error.log*
 
 # flask
 __pycache__
+
+/.idea
