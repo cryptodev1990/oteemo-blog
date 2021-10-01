@@ -21,27 +21,40 @@ function clickMe(){
     alert('Needs to be filled');
 }
 
-function App() {
-    const [articles, setArticles] = useState([]);
-    useEffect(()=>{
-        fetch('http://localhost:5001/mongodb', {
-          methods: 'GET'
-      })
-        .then(response => response.json())
-        .catch(err => {console.log("error:", err)})
-        .then(data => setArticles(data));
-    }, []);
-    console.log(articles)
-    console.log(typeof articles['articles']);
-    console.log(articles['articles']);
-  //   var a = articles['articles'].map(function(article) {
-  //    return <li>{article}</li>; 
-  // })
-    // console.log(typeof a);
-    // console.log(a);
-    // var articleList = articles.map(function(article){
-    //     return <Blog title={article.title} author={article.author}></Blog>
-    // });
+class App extends React.Component {
+  state = {
+    isLoading: true
+  };
+
+  componentDidMount() {
+    fetch('http://localhost:5001/mongodb',{'methods':
+  'GET'})
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoading: false,
+            items: result.articles
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoading: true,
+            error
+          });
+        }
+      )
+  }
+
+  render() {
+    console.log(this.state.items)
+    if (this.state.isLoading || this.state.items == null ) {
+      return null; //app is not ready (fake request is in process)
+    }
+
     return (
         <div>
             <h1>Oteemo Blog</h1>
@@ -51,6 +64,13 @@ function App() {
                     <Col className="columns">2 of 3</Col>
                     <Col className="columns">3 of 3</Col>
                 </Row>
+                <ul>
+                  {this.state.items.map(item =>
+                    <li>
+                      {item.Document.author}
+                    </li>
+                    )}
+                </ul>
                 <Create
                     title="Create Blog Post"
                     type="outline"/>
@@ -66,7 +86,6 @@ function App() {
             </Container>
         </div>
     );
-
+  }
 }
-
 export default App;
