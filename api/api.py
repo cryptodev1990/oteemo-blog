@@ -1,5 +1,6 @@
 import time
 from flask import Flask, request, json, Response
+from flask_cors import CORS
 from pymongo import MongoClient
 import logging
 
@@ -7,15 +8,15 @@ class MongoAPI:
     def __init__(self, data):
         self.client = MongoClient("mongodb://localhost:5000/")
 
-        database = data['database']
-        collection = data['collection']
+        database = 'BlogDB'
+        collection = 'posts'
         cursor = self.client[database]
         self.collection = cursor[collection]
         self.data = data
 
     def read(self):
         documents = self.collection.find()
-        output = [{item: data[item] for item in data if item != '_id'} for data in documents]
+        output = {"articles":[{item: data[item] for item in data if item != '_id'} for data in documents]}
         return output
     
     def write(self, data):
@@ -40,6 +41,7 @@ class MongoAPI:
         return output
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def base():
@@ -50,10 +52,10 @@ def base():
 @app.route('/mongodb', methods=['GET'])
 def mongo_read():
     data = request.json
-    if data is None or data == {}:
-        return Response(response=json.dumps({"Error": "Please provide connection information"}),
-                status=400,
-                mimetype='appplication/json')
+    # if data is None or data == {}:
+    #     return Response(response=json.dumps({"Error": "Please provide connection information"}),
+    #             status=400,
+    #             mimetype='appplication/json')
     obj1 = MongoAPI(data) 
     response = obj1.read()
     return Response(response=json.dumps(response),

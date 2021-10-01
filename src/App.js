@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import {Container, Row, Col} from 'react-bootstrap'
 import './button';
+import axios from 'axios';
 import Create from "./Create";
 import Read from "./Read";
 import Update from "./Update";
@@ -21,20 +22,33 @@ function clickMe(){
 }
 
 function App() {
+    const [articles, setArticles] = useState([]);
+    useEffect(()=>{
+        fetch('http://localhost:5001/mongodb', {
+          methods: 'GET'
+      })
+        .then(response => response.json())
+        .catch(err => {console.log("error:", err)})
+        .then(data => setArticles(data));
+    }, []);
+    console.log(typeof articles['articles']);
+    console.log(articles['articles']);
+    const a = articles['articles']
+    console.log(typeof a);
+    console.log(a);
+    // var articleList = articles.map(function(article){
+    //     return <Blog title={article.title} author={article.author}></Blog>
+    // });
     return (
         <div>
             <h1>Oteemo Blog</h1>
+            <h2>{articles}</h2>
+            <ul>
+              {a.map(article => (
+                  <li>test</li>
+                ))}
+          </ul>
             <Container>
-                <Row className="rows">
-                    <Col className="columns" lg={8}> <Blog title='MongoDB How to'
-                                                           author="Connor"
-                                                           date="Sept 29, 2021"></Blog></Col>
-                    <button onClick={clickMe}/>
-                    <Col className="columns" lg={4}> <Blog title='Flask rundown'
-                                                           author="Connor"
-                                                           date="Sept 29, 2021"></Blog></Col>
-                    <button/>
-                </Row>
                 <Row className="rows">
                     <Col className="columns">1 of 3</Col>
                     <Col className="columns">2 of 3</Col>
