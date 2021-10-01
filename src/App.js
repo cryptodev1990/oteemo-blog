@@ -31,23 +31,20 @@ function App() {
         .catch(err => {console.log("error:", err)})
         .then(data => setArticles(data));
     }, []);
+    console.log(articles)
     console.log(typeof articles['articles']);
     console.log(articles['articles']);
-    const a = articles['articles']
-    console.log(typeof a);
-    console.log(a);
+  //   var a = articles['articles'].map(function(article) {
+  //    return <li>{article}</li>; 
+  // })
+    // console.log(typeof a);
+    // console.log(a);
     // var articleList = articles.map(function(article){
     //     return <Blog title={article.title} author={article.author}></Blog>
     // });
     return (
         <div>
             <h1>Oteemo Blog</h1>
-            <h2>{articles}</h2>
-            <ul>
-              {a.map(article => (
-                  <li>test</li>
-                ))}
-          </ul>
             <Container>
                 <Row className="rows">
                     <Col className="columns">1 of 3</Col>
