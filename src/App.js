@@ -11,9 +11,12 @@ import Delete from "./Delete";
 function Blog(props) {
     return (
         <div>
-            <h1>Title: {props.title}</h1>
-            <h2>Author: {props.author}</h2>
-            <h3>Date: {props.date}</h3>
+            <h2>{props.title}</h2>
+            <h3>Author: {props.author}</h3>
+            <h4>{props.date}</h4>
+            <p>
+                {props.posts}
+            </p>
         </div>);
 }
 
@@ -59,18 +62,12 @@ class App extends React.Component {
         <div>
             <h1>Oteemo Blog</h1>
             <Container>
-                <Row className="rows">
-                    <Col className="columns">1 of 3</Col>
-                    <Col className="columns">2 of 3</Col>
-                    <Col className="columns">3 of 3</Col>
-                </Row>
-                <ul>
                   {this.state.items.map(item =>
-                    <li>
-                      {item.Document.author}
-                    </li>
+                      <Blog title={item.title}
+                            author={item.author}
+                            date={item.date}
+                            posts={item.posts}></Blog>
                     )}
-                </ul>
                 <Create
                     title="Create Blog Post"
                     type="outline"/>
