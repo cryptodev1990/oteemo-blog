@@ -20,7 +20,6 @@ class MongoAPI:
         return output
     
     def write(self, data):
-        logging.info('Writing Data')
         new_document = data['Document']
         response = self.collection.insert_one(new_document) 
         output = { 'Status': 'Successfully Inserted',
@@ -65,8 +64,8 @@ def mongo_read():
 @app.route('/mongodb', methods=['POST'])
 def mongo_write():
     data = request.json
-    if data is None or data == {} or 'Document' not in data:
-        return Response(response=json.dumps({"Error": "Please provide connection information"}),
+    if 'Document' not in data:
+        return Response(response=json.dumps({"Error": "Please provide document to write."}),
                 status=400,
                 mimetype='application/json')
     obj1 = MongoAPI(data) 
@@ -79,7 +78,7 @@ def mongo_write():
 @app.route('/mongodb', methods=['PUT'])
 def mongo_update():
     data = request.json
-    if data is None or data == {} or 'DataToBeUpdated' not in data:
+    if 'Document' not in data or 'DataToBeUpdated' not in data:
         return Response(response=json.dumps({"Error": "Please provide connection information"}),
                         status=400,
                         mimetype='application/json')
@@ -92,8 +91,8 @@ def mongo_update():
 @app.route('/mongodb', methods=['DELETE'])
 def mongo_delete():
     data = request.json
-    if data is None or data == {} or 'Filter' not in data:
-        return Response(response=json.dumps({"Error": "Please provide connection information"}),
+    if 'Filter' not in data:
+        return Response(response=json.dumps({"Error": "Please provide filter for the Document you would like to delete."}),
                         status=400,
                         mimetype='application/json')
     obj1 = MongoAPI(data)
