@@ -1,27 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
-import {Container, Row, Col} from 'react-bootstrap'
-import './button';
-import axios from 'axios';
-import Create from "./Create";
-import Read from "./Read";
-import Update from "./Update";
-import Delete from "./Delete";
+import { Container } from 'react-bootstrap'
 
 function Blog(props) {
-    return (
-        <div>
-            <h2>{props.title}</h2>
-            <h3>Author: {props.author}</h3>
-            <h4>{props.date}</h4>
-            <p>
-                {props.posts}
-            </p>
-        </div>);
-}
-
-function clickMe(){
-    alert('Needs to be filled');
+  return (
+    <div class="post">
+      <hr></hr>  
+      <div class="block">
+        <h2>{props.title}</h2>
+        <a class="btn btn-large btn-primary edit" href="#">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-large btn-primary delete" href="#">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="block">
+        <p class="author">{props.author}</p>
+        <p class="date">{props.date}</p>
+      </div>
+      <p class="body">
+        {props.posts}
+      </p>
+    </div>);
 }
 
 class App extends React.Component {
@@ -30,8 +31,10 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:5001/mongodb',{'methods':
-  'GET'})
+    fetch('http://localhost:5001/mongodb', {
+      'methods':
+        'GET'
+    })
       .then(res => res.json())
       .then(
         (result) => {
@@ -53,35 +56,27 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.items)
-    if (this.state.isLoading || this.state.items == null ) {
+    if (this.state.isLoading || this.state.items == null) {
       return null; //app is not ready (fake request is in process)
     }
 
     return (
-        <div>
-            <h1>Oteemo Blog</h1>
-            <Container>
-                  {this.state.items.map(item =>
-                      <Blog title={item.title}
-                            author={item.author}
-                            date={item.date}
-                            posts={item.posts}></Blog>
-                    )}
-                <Create
-                    title="Create Blog Post"
-                    type="outline"/>
-                <Read
-                    title="Read"
-                    type="outline"/>
-                <Update
-                    title="Update"
-                    type="outline"/>
-                <Delete
-                    title="Delete"
-                    type="outline"/>
-            </Container>
+      <div>
+        <h1>Oteemo Blog</h1>
+        <div class="center">
+          <a class="btn btn-large btn-primary create center" href="#">
+            <i class="fa fa-lg fa-plus" aria-hidden="true"></i>
+          </a>
         </div>
+        <Container>
+          {this.state.items.map(item =>
+            <Blog title={item.title}
+              author={item.author}
+              date={item.date}
+              posts={item.posts}></Blog>
+          )}
+        </Container>
+      </div>
     );
   }
 }
