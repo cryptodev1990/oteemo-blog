@@ -1,7 +1,10 @@
-.rows {
-  border: 2px solid #217474;
-}
+h1{color: #269A95;
+    font-weight: bold;
+    font-size: xxx-large;
+    font-family: Helvetica;
+    text-align: center;
+    }
 
-.columns{
-  border: 2px solid black;
+div{
+    margin: 25px 25px 0 25px;
 }

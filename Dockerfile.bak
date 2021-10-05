@@ -1,0 +1,31 @@
+# Step 1 select default OS image
+FROM alpine
+
+
+# Step 2 Setting up environment
+RUN apk add --no-cache python3 py3-pip && pip install --upgrade pip pipenv
+
+# Step 3 Configure a software
+ENV PROJECT_DIR /usr/local/src/api
+WORKDIR ${PROJECT_DIR} # Defining working directory 
+
+# Installing dependencies.
+COPY Pipfile .
+COPY Pipfile.lock .
+
+RUN pwd
+RUN ls
+RUN pipenv install --deploy --ignore-pipfile
+
+# Copying project files.
+COPY ["api/api.py", "/api"]
+
+# Exposing an internal port
+EXPOSE 5001
+
+
+# Step 4 set default commands
+ENTRYPOINT [ "python3" ] # Default command
+
+# These commands will be replaced if user provides any command by himself
+CMD ["api.py"]
