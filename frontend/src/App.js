@@ -6,16 +6,16 @@ function Blog(props) {
   return (
     <div class="post">
       <hr></hr>
-        <div class="right">
+      <div class="right">
         <a className="btn btn-large btn-primary edit" href="#">
-            <i className="fa fa-pencil" aria-hidden="true"></i>
+          <i className="fa fa-pencil" aria-hidden="true"></i>
         </a>
         <a className="btn btn-large btn-primary delete" href="#">
-            <i className="fa fa-trash" aria-hidden="true"></i>
+          <i className="fa fa-trash" aria-hidden="true"></i>
         </a>
-        </div>
+      </div>
       <div class="block">
-          <h2>{props.title}</h2>
+        <h2>{props.title}</h2>
       </div>
       <div class="block">
         <p class="author">{props.author}</p>
