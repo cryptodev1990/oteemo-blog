@@ -14,16 +14,6 @@ div.post {
     margin: 0 50px 0 50px;
 }
 
-h3 {
-  display: inline-block;
-  text-align: left
-}
-
-h4 {
-  display: inline-block;
-  text-align: right
-}
-
 div.block {
   display: flex;
   justify-content: space-between;
@@ -40,3 +30,15 @@ p.body {
 div.center {
   text-align: center;
 }
+
+title.block {
+  text-align: right;
+}
+
+div.right {
+  text-align: right;
+}
+
+
+
+

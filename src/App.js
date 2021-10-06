@@ -5,15 +5,17 @@ import { Container } from 'react-bootstrap'
 function Blog(props) {
   return (
     <div class="post">
-      <hr></hr>  
+      <hr></hr>
+        <div class="right">
+        <a className="btn btn-large btn-primary edit" href="#">
+            <i className="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+        <a className="btn btn-large btn-primary delete" href="#">
+            <i className="fa fa-trash" aria-hidden="true"></i>
+        </a>
+        </div>
       <div class="block">
-        <h2>{props.title}</h2>
-        <a class="btn btn-large btn-primary edit" href="#">
-          <i class="fa fa-pencil" aria-hidden="true"></i>
-        </a>
-        <a class="btn btn-large btn-primary delete" href="#">
-          <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
+          <h2>{props.title}</h2>
       </div>
       <div class="block">
         <p class="author">{props.author}</p>
