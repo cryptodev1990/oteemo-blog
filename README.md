@@ -15,11 +15,20 @@ pre-containerization installation instructions.
 `npm start`
 
 ### backend
+**LEGACY INSTALL** now broken!
+
 `pipenv install --ignore-pipfile`
 
 `pipenv shell`
 
 `python api/api.py`
+
+---
+**NEW** dockerized version
+
+`docker build -t backend:1.0 .`
+
+`docker container run --name flask -p 5001:5001 backend:1.0`
 
 ### db
 start mongo via docker:

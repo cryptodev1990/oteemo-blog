@@ -4,9 +4,11 @@ from flask_cors import CORS
 from pymongo import MongoClient
 import logging
 
+MONGO_URL = "mongodb://host.docker.internal:5000/"
+
 class MongoAPI:
     def __init__(self, data):
-        self.client = MongoClient("mongodb://localhost:5000/")
+        self.client = MongoClient(MONGO_URL)
 
         database = 'BlogDB'
         collection = 'posts'
