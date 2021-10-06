@@ -1,21 +1,26 @@
-
 # Oteemo Blog
 Sample React, Flask, and MongoDB blog application for use in Platform One Big Bang
 
 ## Roadmap
 * containerize each part of the app
+  - [ ] frontend
+  - [x] backend
+  - [x] db
 * orchestrate with kubernetes
 
 ## Installation
-pre-containerization installation instructions.
 
 ### frontend
+`cd frontend`
+
 `npm install`
 
 `npm start`
 
 ### backend
-**LEGACY INSTALL** now broken!
+**LEGACY INSTALL**
+
+`cd backend`
 
 `pipenv install --ignore-pipfile`
 
@@ -25,6 +30,8 @@ pre-containerization installation instructions.
 
 ---
 **NEW** dockerized version
+
+`cd backend`
 
 `docker build -t backend:1.0 .`
 
