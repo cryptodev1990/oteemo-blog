@@ -11,11 +11,21 @@ Sample React, Flask, and MongoDB blog application for use in Platform One Big Ba
 ## Installation
 
 ### frontend
+**LEGACY INSTALL**
+
 `cd frontend`
 
 `npm install`
 
 `npm start`
+
+**NEW**
+
+`cd frontend`
+
+`docker build -t frontend:1.0 .`
+
+`docker run --name react -p 3000:3000 frontend:1.0`
 
 ### backend
 **LEGACY INSTALL**
