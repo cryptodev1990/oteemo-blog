@@ -22,6 +22,7 @@ pre-containerization installation instructions.
 `pipenv shell`
 
 `python api/api.py`
+
 ---
 **NEW** dockerized version
 
