@@ -23,7 +23,7 @@ Sample React, Flask, and MongoDB blog application for use in Platform One Big Ba
 
 `cd frontend`
 
-`docker build -t frontend:1.0`
+`docker build -t frontend:1.0 .`
 
 `docker run --name react -p 3000:3000 frontend:1.0`
 
