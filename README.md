@@ -1,66 +1,67 @@
 # Oteemo Blog
 Sample React, Flask, and MongoDB blog application for use in Platform One Big Bang
 
-## Roadmap
+# Roadmap
 * containerize each part of the app
-  - [ ] frontend
+  - [x] frontend
   - [x] backend
   - [x] db
+* skipping docker-compose
 * orchestrate with kubernetes
 
-## Installation
+# Installation
 
-### frontend
+## frontend
 **LEGACY INSTALL**
 
-`cd frontend`
+```bash
+cd frontend
+npm install
+npm start
+```
 
-`npm install`
+**NEW INSTALL**
 
-`npm start`
+```bash
+cd frontend
+docker build -t frontend:1.0 .
+docker run --name react -p 3000:3000 frontend:1.0
+```
 
-**NEW**
-
-`cd frontend`
-
-`docker build -t frontend:1.0 .`
-
-`docker run --name react -p 3000:3000 frontend:1.0`
-
-### backend
+## backend
 **LEGACY INSTALL**
 
-`cd backend`
+```bash
+cd backend
+pipenv install --ignore-pipfile
+pipenv shell
+python api/api.py
+```
+**NEW INSTALL**
 
-`pipenv install --ignore-pipfile`
+```bash
+cd backend
+docker build -t backend:1.0 .
+docker container run --name flask -p 5001:5001 backend:1.0
+```
 
-`pipenv shell`
+## db
+**LEGACY INSTALL**
+```bash
+docker run --name mongodb -d -p 5000:27017 mongo
+# use mongosh to init BlogDB
+mongosh localhost:5000
+> use BlogDB
+> db.posts.insertOne({'author':'jedi', 'date': 'whatevadate', 'title':'coolstring', 'posts':'body of msg'})
+```
 
-`python api/api.py`
+**NEW INSTALL**
+```bash
+cd db
+chmod +x install.sh
+./install.sh
+```
 
----
-**NEW** dockerized version
-
-`cd backend`
-
-`docker build -t backend:1.0 .`
-
-`docker container run --name flask -p 5001:5001 backend:1.0`
-
-### db
-start mongo via docker:
-
-`docker run --name mongodb -d -p 5000:27017 mongo`
-
-connect to mongo
-
-`mongo localhost:5000`
-
-init the db
-
-`> use BlogDB`
-
-populate with some fixture
-
-`> db.posts.insertOne({'author':'jedi', 'date': 'whatevadate', 'title':'coolstring', 'posts':'body of msg'})`
-<- we gotta change the `posts` key to `body`, `text`, or `post` or smth
+NOTE: Database is ephemeral, initialized with fixture data upon container
+creation via install script for demonstration purposes. We could mount a
+local directory or just implement StatefulSet down the line.
