@@ -39,6 +39,10 @@ div.right {
   text-align: right;
 }
 
+.padRight {
+  margin-right: 10px;
+}
 
-
-
+.space {
+  margin: 0 10px 0 10px;
+}

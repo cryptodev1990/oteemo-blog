@@ -63,7 +63,9 @@ def mongo_read():
 
 @app.route('/mongodb', methods=['POST'])
 def mongo_write():
-    data = request.json
+    data = json.loads(request.data.decode('utf8'))
+    print(data)
+    # data = request.json
     if 'Document' not in data:
         return Response(response=json.dumps({"Error": "Please provide document to write."}),
                 status=400,
@@ -77,7 +79,8 @@ def mongo_write():
 
 @app.route('/mongodb', methods=['PUT'])
 def mongo_update():
-    data = request.json
+    data = json.loads(request.data.decode('utf8'))
+    print(data)
     if 'Document' not in data or 'DataToBeUpdated' not in data:
         return Response(response=json.dumps({"Error": "Please provide connection information"}),
                         status=400,
@@ -90,8 +93,10 @@ def mongo_update():
 
 @app.route('/mongodb', methods=['DELETE'])
 def mongo_delete():
-    data = request.json
-    if 'Filter' not in data:
+    data = json.loads(request.data.decode('utf8'))
+    # print(jsonObj)
+    # data = request.json
+    if data is None or data is {} or 'Filter' not in data:
         return Response(response=json.dumps({"Error": "Please provide filter for the Document you would like to delete."}),
                         status=400,
                         mimetype='application/json')
