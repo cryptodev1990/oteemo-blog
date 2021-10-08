@@ -4,9 +4,11 @@ from flask_cors import CORS
 from pymongo import MongoClient
 import logging
 
+MONGO_URL = "mongodb://host.docker.internal:5000/"
+
 class MongoAPI:
     def __init__(self, data):
-        self.client = MongoClient("mongodb://localhost:5000/")
+        self.client = MongoClient(MONGO_URL)
 
         database = 'BlogDB'
         collection = 'posts'
@@ -81,7 +83,7 @@ def mongo_write():
 def mongo_update():
     data = json.loads(request.data.decode('utf8'))
     print(data)
-    if 'Document' not in data or 'DataToBeUpdated' not in data:
+    if 'Filter' not in data or 'DataToBeUpdated' not in data:
         return Response(response=json.dumps({"Error": "Please provide connection information"}),
                         status=400,
                         mimetype='application/json')
