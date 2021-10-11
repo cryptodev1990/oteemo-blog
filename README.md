@@ -1,6 +1,11 @@
 # Oteemo Blog
 Sample React, Flask, and MongoDB blog application for use in Platform One Big Bang
 
+## Disclaimer / Warning
+
+This is a demo application. It is incomplete and intended for training.
+**NOT** to be used in production.
+
 # Roadmap
 * containerize each part of the app
   - [x] frontend
